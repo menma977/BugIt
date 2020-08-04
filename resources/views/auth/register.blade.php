@@ -1,7 +1,7 @@
 @extends('layouts.login')
 
 @section('content')
-  <div class="card elevation-2" style="border-radius: 10%;">
+  <div class="card elevation-2" style="border-radius: 10%; margin-top: 10px">
     <div class="card-body login-card-body" style="border-radius: 10%;">
       <div class="login-logo">
         <a href="{{ url('/') }}">
