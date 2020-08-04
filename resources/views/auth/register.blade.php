@@ -42,7 +42,7 @@
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
-                 placeholder="Enter email"
+                 placeholder="Enter Password"
                  value="{{ old('password') }}"
                  aria-describedby="password"
                  aria-invalid="true"
@@ -55,7 +55,7 @@
         <div class="form-group">
           <label for="password-confirm">Confrimation Password</label>
           <input type="password" name="password_confirmation" id="password-confirm" class="form-control @error('password_confirmation') is-invalid @enderror"
-                 placeholder="Enter email"
+                 placeholder="Enter confrimation password"
                  value="{{ old('password_confirmation') }}"
                  aria-describedby="password-confirm"
                  aria-invalid="true"
