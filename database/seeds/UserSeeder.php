@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
     $user->username = "menma977";
     $user->email = "com.owl.minerva@gmail.com";
     $user->password = Hash::make('menma977');
+    $user->role = 1;
     $user->save();
 
     $profile = new Profile();

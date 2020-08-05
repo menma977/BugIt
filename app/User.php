@@ -11,9 +11,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use Laravel\Passport\HasApiTokens;
 
 /**
- * @property integer id
+ * @property string id
+ * @property integer role
  * @property string username
  * @property string email
  * @property string password
@@ -21,9 +24,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
-  use Notifiable;
-  use Uuid;
-  use SoftDeletes;
+  use Notifiable, Uuid, SoftDeletes, HasApiTokens;
 
   protected $keyType = 'string';
   public $incrementing = false;
@@ -82,5 +83,13 @@ class User extends Authenticatable
   public function Theme()
   {
     return $this->hasOne(Theme::class, 'user_id', 'id');
+  }
+
+  /**
+   * @return bool
+   */
+  public function isOnline(): bool
+  {
+    return Cache::has('activeUser' . $this->id);
   }
 }

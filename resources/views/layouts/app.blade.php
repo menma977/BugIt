@@ -54,7 +54,8 @@
         padding-right: 0 !important;
     }
 </style>
-<body class="hold-transition sidebar-mini {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->accent_color : 'accent-primary' }}">
+
+<body id="bodyContent" class="hold-transition sidebar-mini {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->accent_color : 'accent-primary' }}">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent></x-HeaderBarComponent>
@@ -98,5 +99,39 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 @yield('js')
+
+<script>
+  $(function () {
+    fetch('{{ route('home.authOnline') }}').then((response) => {
+      return response.json();
+    }).then((json) => {
+      try {
+        if (json.data) {
+          $("#online").addClass("text-success");
+        } else {
+          $("#online").removeClass("text-success");
+        }
+      } catch (e) {
+        $("#online").removeClass("text-success");
+      }
+    });
+    setInterval(function () {
+      fetch('{{ route('home.authOnline') }}').then((response) => {
+        return response.json();
+      }).then((json) => {
+        try {
+          if (json.data) {
+            $("#online").addClass("text-success");
+          } else {
+            $("#online").removeClass("text-success");
+          }
+        } catch (e) {
+          $("#online").removeClass("text-success");
+        }
+      });
+    }, 5000);
+  });
+</script>
+
 </body>
 </html>

@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string accent_color
  * @property string sidebar
  * @property string brand_logo
+ * @property string card_default
+ * @property string card_outline
+ * @property string card_bg_color
  */
 class Theme extends Model
 {
@@ -33,6 +36,9 @@ class Theme extends Model
     'accent_color',
     'sidebar',
     'brand_logo',
+    'card_default',
+    'card_outline',
+    'card_bg_color',
   ];
 
   /**

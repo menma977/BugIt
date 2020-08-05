@@ -1,11 +1,11 @@
-<nav class="main-header navbar navbar-expand {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->navbar : 'navbar-dark navbar-primary' }}">
+<nav id="navbarContent" class="main-header navbar navbar-expand {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->navbar : 'navbar-dark navbar-primary' }}">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">Home</a>
+      <a href="{{ route('home.home') }}" class="nav-link {{ request()->is(['home']) ? 'active' : '' }}">Home</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link">Contact</a>

@@ -20,6 +20,9 @@ class CreateThemesTable extends Migration
       $table->string('accent_color')->default('accent-primary');
       $table->string('sidebar')->default('sidebar-light-primary');
       $table->string('brand_logo')->default('navbar-primary');
+      $table->string('card_default')->default('card-primary');
+      $table->string('card_outline')->default('card-primary');
+      $table->string('card_bg_color')->default('bg-primary');
       $table->timestamps();
       $table->softDeletes();
     });

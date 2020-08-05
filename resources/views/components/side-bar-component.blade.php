@@ -1,6 +1,6 @@
-<aside class="main-sidebar elevation-4 {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->sidebar : 'sidebar-light-primary' }}">
+<aside id="sidebarContent" class="main-sidebar elevation-4 {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->sidebar : 'sidebar-light-primary' }}">
   <!-- Brand Logo -->
-  <a href="#" class="brand-link {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->brand_logo : '' }}">
+  <a href="#" id="brandLogoContent" class="brand-link {{ \Illuminate\Support\Facades\Auth::check() ? \Illuminate\Support\Facades\Auth::user()->Theme->brand_logo : '' }}">
     <img src="{{ asset('dist/img/logo.png') }}"
          alt="AdminLTE Logo"
          class="brand-image img-circle elevation-3"
@@ -16,15 +16,16 @@
         <img src="{{ asset('dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">
+          Alexander Pierce
+          <div id="online" class="fa fa-circle position-absolute" style="font-size: 10px"></div>
+        </a>
       </div>
     </div>
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -73,7 +74,15 @@
             </p>
           </a>
         </li>
-
+        <li class="nav-header">Configuration</li>
+        <li class="nav-item">
+          <a href="{{ route('theme.edit') }}" class="nav-link {{ request()->is(['theme/*']) ? 'active' : '' }}">
+            <i class="nav-icon fa fa-cogs"></i>
+            <p>
+              Theme Setting
+            </p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>
