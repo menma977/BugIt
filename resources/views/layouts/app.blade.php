@@ -19,7 +19,8 @@
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="{{ url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') }}" rel="stylesheet">
-  @yield('css')
+
+  @yield('addCss')
 </head>
 <style>
     .select2-selection {
@@ -98,7 +99,7 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-@yield('js')
+@yield('addJs')
 
 <script>
   $(function () {

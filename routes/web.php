@@ -26,7 +26,7 @@ Route::middleware(['online', 'auth'])->group(function () {
     Route::get('/authOnline', 'HomeController@authOnline')->name('authOnline')->middleware('auth');
   });
 
-  Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
+  Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('/', 'UserController@index')->name('index')->middleware('auth', 'role:1');
     Route::get('/create', 'UserController@index')->name('create')->middleware('auth', 'role:1');
     Route::post('/store', 'UserController@index')->name('store')->middleware('auth', 'role:1');
@@ -36,8 +36,8 @@ Route::middleware(['online', 'auth'])->group(function () {
     Route::get('/delete/{id}', 'UserController@index')->name('delete')->middleware('auth', 'role:1');
   });
 
-  Route::group(['prefix' => 'theme', 'as' => 'theme.'], static function () {
+  Route::group(['prefix' => 'theme', 'as' => 'theme.'], function () {
     Route::get('/edit', 'ThemeController@edit')->name('edit')->middleware('auth');
-    Route::get('/update', 'ThemeController@update')->name('update')->middleware('auth');
+    Route::post('/update', 'ThemeController@update')->name('update')->middleware('auth');
   });
 });
