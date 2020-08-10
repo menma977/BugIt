@@ -3,12 +3,12 @@
 @section('title')
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>Blank Page</h1>
+      <h1>Theme Setting</h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('home.home') }}">Home</a></li>
-        <li class="breadcrumb-item active">Blank Page</li>
+        <li class="breadcrumb-item active">Theme</li>
       </ol>
     </div>
   </div>
@@ -16,11 +16,12 @@
 
 @section('content')
   <form action="{{ route('theme.update') }}" method="post" class="row">
+    @csrf
     <div class="col-md-12 mb-2">
-      <button type="button" class="btn btn-outline-success float-right">SAVE</button>
+      <button type="submit" class="btn btn-outline-success float-right">save</button>
     </div>
     <div class="col-md-6">
-      <div class="card card-outline card-primary">
+      <div class="card {{ Auth::user()->theme->card_default }}">
         <div class="card-header">
           <h3 class="card-title">Navbar Variants</h3>
         </div>
@@ -150,7 +151,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card card-outline card-primary">
+      <div class="card {{ Auth::user()->theme->card_default }}">
         <div class="card-header">
           <h3 class="card-title">Brand Logo Variants</h3>
         </div>
@@ -230,7 +231,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card card-outline card-primary">
+      <div class="card card-outline {{ Auth::user()->theme->card_outline }}">
         <div class="card-header">
           <h3 class="card-title">Accent Color Variants</h3>
         </div>
@@ -298,7 +299,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card card-outline card-primary">
+      <div class="card card-outline {{ Auth::user()->theme->card_bg_color }}">
         <div class="card-header">
           <h3 class="card-title">Dark/Light Sidebar Variants</h3>
         </div>
@@ -374,7 +375,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div id="cardDefault" class="card card-primary">
+      <div id="cardDefault" class="card {{ Auth::user()->theme->card_default }}">
         <div class="card-header">
           <h3 class="card-title">Card Default</h3>
           <div class="card-tools">
@@ -397,7 +398,8 @@
               <button type="button" onclick="cardDefault('card-primary')" class="btn bg-primary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">primary</button>
             </div>
             <div class="col-md-4 mb-2">
-              <button type="button" onclick="cardDefault('card-secondary')" class="btn bg-secondary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">secondary</button>
+              <button type="button" onclick="cardDefault('card-secondary')" class="btn bg-secondary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">secondary
+              </button>
             </div>
             <div class="col-md-4 mb-2">
               <button type="button" onclick="cardDefault('card-success')" class="btn bg-success elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">success</button>
@@ -416,7 +418,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div id="cardOutline" class="card card-outline card-primary">
+      <div id="cardOutline" class="card card-outline {{ Auth::user()->theme->card_outline }}">
         <div class="card-header">
           <h3 class="card-title">Card Outline</h3>
 
@@ -432,7 +434,7 @@
             </div>
             <input id="cardOutlineInput" name="cardOutlineInput" type="text" class="form-control @error('cardOutlineInput') is-invalid @enderror"
                    placeholder="Card Color"
-                   value="{{ old('cardOutlineInput') ?: $theme->card_default }}"
+                   value="{{ old('cardOutlineInput') ?: $theme->card_outline }}"
                    readonly>
           </div>
           <div class="row">
@@ -440,7 +442,8 @@
               <button type="button" onclick="cardOutline('card-primary')" class="btn bg-primary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">primary</button>
             </div>
             <div class="col-md-4 mb-2">
-              <button type="button" onclick="cardOutline('card-secondary')" class="btn bg-secondary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">secondary</button>
+              <button type="button" onclick="cardOutline('card-secondary')" class="btn bg-secondary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">secondary
+              </button>
             </div>
             <div class="col-md-4 mb-2">
               <button type="button" onclick="cardOutline('card-success')" class="btn bg-success elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">success</button>
@@ -459,7 +462,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div id="cardColorBlock" class="card bg-primary">
+      <div id="cardColorBlock" class="card {{ Auth::user()->theme->card_bg_color }}">
         <div class="card-header">
           <h3 class="card-title">Card Color</h3>
           <div class="card-tools">
@@ -474,7 +477,7 @@
             </div>
             <input id="cardColorBlockInput" name="cardColorBlockInput" type="text" class="form-control @error('cardColorBlockInput') is-invalid @enderror"
                    placeholder="Card Color"
-                   value="{{ old('cardColorBlockInput') ?: $theme->card_default }}"
+                   value="{{ old('cardColorBlockInput') ?: $theme->card_bg_color }}"
                    readonly>
           </div>
           <div class="row">
@@ -482,7 +485,8 @@
               <button type="button" onclick="cardColorBlock('bg-primary')" class="btn bg-primary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">primary</button>
             </div>
             <div class="col-md-4 mb-2">
-              <button type="button" onclick="cardColorBlock('bg-secondary')" class="btn bg-secondary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">secondary</button>
+              <button type="button" onclick="cardColorBlock('bg-secondary')" class="btn bg-secondary elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">secondary
+              </button>
             </div>
             <div class="col-md-4 mb-2">
               <button type="button" onclick="cardColorBlock('bg-success')" class="btn bg-success elevation-2 btn-sm btn-block {{ str_contains($theme->card_default, 'card-primary') ? 'active' : '' }}">success</button>
@@ -503,7 +507,15 @@
   </form>
 @endsection
 
-@section('js')
+@section('addCss')
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+@endsection
+
+@section('addJs')
+  <!-- Toastr -->
+  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+
   <script>
     let typeSidebar
 
@@ -555,5 +567,35 @@
       $('#cardColorBlock').removeClass().addClass('card ' + param);
       $('#cardColorBlockInput').val(param);
     }
+
+    $(function () {
+      @error('navbarInput')
+      toastr.error("{{ str_replace('navbarInput', 'navbar', $message) }}");
+      @enderror
+
+      @error('brandLogoInput')
+      toastr.error("{{ str_replace('brandLogoInput', 'brand logo', $message) }}");
+      @enderror
+
+      @error('accentInput')
+      toastr.error("{{ str_replace('accentInput', 'accent', $message) }}");
+      @enderror
+
+      @error('sidebarInput')
+      toastr.error("{{ str_replace('sidebarInput', 'sidebar', $message) }}");
+      @enderror
+
+      @error('cardDefaultInput')
+      toastr.error("{{ str_replace('cardDefaultInput', 'card default', $message) }}");
+      @enderror
+
+      @error('cardOutlineInput')
+      toastr.error("{{ str_replace('cardOutlineInput', 'card outline', $message) }}");
+      @enderror
+
+      @error('cardColorBlockInput')
+      toastr.error("{{ str_replace('cardColorBlockInput', 'card color', $message) }}");
+      @enderror
+    });
   </script>
 @endsection
